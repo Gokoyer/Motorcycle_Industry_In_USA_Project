@@ -15,12 +15,23 @@ ORDER BY
    Type_of_Bike
 
 ----------------------------------------------------------------------------------------------------------
+--Bikes count from 1960 to 2023 across all the bike types
+SELECT
+   SUM(BMW_Bike_Count) AS numBMW,
+   SUM(Duca_Bike_Count) AS numDuca,
+   SUM(KTM_Bike_Count) AS numKTM,
+   SUM(RES_Bike_Count) AS numRES,
+   SUM(Suz_Bike_Count) AS numSuz,
+   SUM(Yama_Bke_Count) AS YamaSuz
+FROM [dbo].[BikeCountsinDecade]
+
+------------------------------------------------------------------------------------------------------------
 --Average Distance(km) traveled by all the 5 types of bikes in all the decades between 1960 - 2023
 SELECT 
    BMWBike.Decade AS Decade,
    ROUND(ISNULL([BMWBike].[AverageMileage], 0), 2, 0) AS BMW_AVGMileage,
    ROUND(ISNULL([DucaBike].[AverageMileage], 0), 2, 0) AS Duca_AVGMileage,
-   ROUND(ISNULL([KTHBike].[AverageMileage], 0), 2, 0) AS KTH_AVGMileage,
+   ROUND(ISNULL([KTMBike].[AverageMileage], 0), 2, 0) AS KTH_AVGMileage,
    ROUND(ISNULL([RESBike].[AverageMileage], 0), 2, 0) AS RES_AVGMileage,
    ROUND(ISNULL([SuzBike].[AverageMileage], 0), 2, 0) AS Suz_AVGMileage,
    ROUND(ISNULL([YamaBike].[AverageMileage], 0), 2, 0) AS Yama_AVGMileage
@@ -28,8 +39,8 @@ FROM
    [dbo].[BMWSelectBikeDecadeAverage] AS [BMWBike]
    LEFT JOIN [dbo].[DucattiSelectBikeDecadeAverage] AS DucaBike 
    ON [BMWBike].[Decade] = DucaBike.Decade
-   LEFT JOIN [dbo].[KTHSelectBikeDecadeAverage] AS KTHBike 
-   ON [BMWBike].[Decade] = [KTHBike].[Decade]
+   LEFT JOIN [dbo].[KTMSelectBikeDecadeAverage] AS KTMBike 
+   ON [BMWBike].[Decade] = [KTMBike].[Decade]
    LEFT JOIN [dbo].[RES_SelectBikeDecadeAverage] AS RESBike
    ON [BMWBike].[Decade] = [RESBike].[Decade]
    LEFT JOIN [dbo].[SuzukiSelectBikeDecadeAverage] AS SuzBike
@@ -45,7 +56,7 @@ SELECT
    BMWBike.Decade AS Decade,
    ROUND(ISNULL([BMWBike].[AveragePrice], 0), 0) AS BMW_AVGPrice,
    ROUND(ISNULL([DucaBike].[AveragePrice], 0),0) AS Duca_AVGPrice,
-   ROUND(ISNULL([KTHBike].[AveragePrice], 0), 0) AS KTH_AVGPrice,
+   ROUND(ISNULL([KTMBike].[AveragePrice], 0), 0) AS KTH_AVGPrice,
    ROUND(ISNULL([RESBike].[AveragePrice], 0), 0) AS RES_AVGPrice,
    ROUND(ISNULL([SuzBike].[AveragePrice], 0), 0) AS Suz_AVGPrice,
    ROUND(ISNULL([YamaBike].[AveragePrice], 0), 0) AS Yama_AVGPrice
@@ -53,8 +64,8 @@ FROM
    [dbo].[BMWSelectBikeDecadeAverage] AS [BMWBike]
    LEFT JOIN [dbo].[DucattiSelectBikeDecadeAverage] AS DucaBike 
    ON [BMWBike].[Decade] = DucaBike.Decade
-   LEFT JOIN [dbo].[KTHSelectBikeDecadeAverage] AS KTHBike 
-   ON [BMWBike].[Decade] = [KTHBike].[Decade]
+   LEFT JOIN [dbo].[KTMSelectBikeDecadeAverage] AS KTMBike 
+   ON [BMWBike].[Decade] = [KTMBike].[Decade]
    LEFT JOIN [dbo].[RES_SelectBikeDecadeAverage] AS RESBike
    ON [BMWBike].[Decade] = [RESBike].[Decade]
    LEFT JOIN [dbo].[SuzukiSelectBikeDecadeAverage] AS SuzBike
@@ -70,7 +81,7 @@ SELECT
    BMWBike.Decade AS Decade,
    ISNULL([BMWBike].[Bike_Count], 0) AS BMW_Bike_Count,
    ISNULL([DucaBike].[Bike_Count], 0) AS Duca_Bike_Count,
-   ISNULL([KTHBike].[Bike_Count], 0) AS KTH_Bike_Count,
+   ISNULL([KTMBike].[Bike_Count], 0) AS KTM_Bike_Count,
    ISNULL([RESBike].[Bike_Count], 0) AS RES_Bike_Count,
    ISNULL([SuzBike].[Bike_Count], 0) AS Suz_Bike_Count,
    ISNULL([YamaBike].[Bike_Count], 0) AS Yama_Bke_Count
@@ -78,8 +89,8 @@ FROM
    [dbo].[BMWSelectBikeDecadeAverage] AS [BMWBike]
    LEFT JOIN [dbo].[DucattiSelectBikeDecadeAverage] AS DucaBike 
    ON [BMWBike].[Decade] = DucaBike.Decade
-   LEFT JOIN [dbo].[KTHSelectBikeDecadeAverage] AS KTHBike 
-   ON [BMWBike].[Decade] = [KTHBike].[Decade]
+   LEFT JOIN [dbo].[KTMSelectBikeDecadeAverage] AS KTMBike 
+   ON [BMWBike].[Decade] = [KTMBike].[Decade]
    LEFT JOIN [dbo].[RES_SelectBikeDecadeAverage] AS RESBike
    ON [BMWBike].[Decade] = [RESBike].[Decade]
    LEFT JOIN [dbo].[SuzukiSelectBikeDecadeAverage] AS SuzBike
@@ -95,7 +106,7 @@ SELECT
    BMWBike.Decade AS Decade,
    ISNULL([BMWBike].[TotalMileage], 0) AS BMW_TotalMileage,
    ISNULL([DucaBike].[TotalMileage], 0) AS Duca_TotalMileage,
-   ISNULL([KTHBike].[TotalMileage], 0) AS KTH_TotalMileage,
+   ISNULL([KTMBike].[TotalMileage], 0) AS KTM_TotalMileage,
    ISNULL([RESBike].[TotalMileage], 0) AS RES_TotalMileage,
    ISNULL([SuzBike].[TotalMileage], 0) AS Suz_TotalMileage,
    ISNULL([YamaBike].[TotalMileage], 0) AS Yama_TotalMileage
@@ -103,8 +114,8 @@ FROM
    [dbo].[BMWSelectBikeDecadeSum] AS [BMWBike]
    LEFT JOIN [dbo].[DucattiSelectBikeDecadeSum] AS DucaBike 
    ON [BMWBike].[Decade] = DucaBike.Decade
-   LEFT JOIN[dbo].[KTHSelectBikeDecadeSum] AS KTHBike 
-   ON [BMWBike].[Decade] = [KTHBike].[Decade]
+   LEFT JOIN[dbo].[KTMSelectBikeDecadeSum] AS KTMBike 
+   ON [BMWBike].[Decade] = [KTMBike].[Decade]
    LEFT JOIN [dbo].[RES_SelectBikeDecadeSum] AS RESBike
    ON [BMWBike].[Decade] = [RESBike].[Decade]
    LEFT JOIN [dbo].[SuzukiSelectBikeDecadeSum] AS SuzBike
@@ -120,7 +131,7 @@ SELECT
    BMWBike.Decade AS Decade,
    ISNULL([BMWBike].[TotalPrice], 0) AS BMW_TotalPrice,
    ISNULL([DucaBike].[TotalPrice], 0) AS Duca_TotalPrice,
-   ISNULL([KTHBike].[TotalPrice], 0) AS KTH_TotalPrice,
+   ISNULL([KTMBike].[TotalPrice], 0) AS KTM_TotalPrice,
    ISNULL([RESBike].[TotalPrice], 0) AS RES_TotalPrice,
    ISNULL([SuzBike].[TotalPrice], 0) AS Suz_TotalPrice,
    ISNULL([YamaBike].[TotalPrice], 0) AS Yama_TotalPrice
@@ -128,8 +139,8 @@ FROM
    [dbo].[BMWSelectBikeDecadeSum] AS [BMWBike]
    LEFT JOIN [dbo].[DucattiSelectBikeDecadeSum] AS DucaBike 
    ON [BMWBike].[Decade] = DucaBike.Decade
-   LEFT JOIN[dbo].[KTHSelectBikeDecadeSum] AS KTHBike 
-   ON [BMWBike].[Decade] = [KTHBike].[Decade]
+   LEFT JOIN[dbo].[KTMSelectBikeDecadeSum] AS KTMBike 
+   ON [BMWBike].[Decade] = [KTMBike].[Decade]
    LEFT JOIN [dbo].[RES_SelectBikeDecadeSum] AS RESBike
    ON [BMWBike].[Decade] = [RESBike].[Decade]
    LEFT JOIN [dbo].[SuzukiSelectBikeDecadeSum] AS SuzBike
@@ -434,7 +445,7 @@ mileage, price, bike types and used time between 1960 - 2023
 SELECT 
    *
 FROM 
-   [dbo].[KTH_bike_Final]
+   [dbo].[KTM_bike_Final]
 ORDER BY 
    Type_of_Bike
 
@@ -446,7 +457,7 @@ SELECT
    ROUND(AVG(Mileage_km), 0) AS AverageMileage, 
    ROUND(AVG(Price_$), 0) AS AveragePrice 
 FROM 
-   [dbo].[KTH_bike_Final]
+   [dbo].[KTM_bike_Final]
 GROUP BY 
   10*FLOOR(Used_Time/10) 
 ORDER BY
@@ -460,7 +471,7 @@ SELECT
    SUM(Mileage_km) AS TotalMileage, 
    SUM(Price_$) AS TotalPrice 
 FROM 
-   [dbo].[KTH_bike_Final]
+   [dbo].[KTM_bike_Final]
 GROUP BY 
   10*FLOOR(Used_Time/10) 
 ORDER BY
@@ -474,7 +485,7 @@ SELECT
    AVG(Mileage_km) AS AvgMileage_by_Year,
    AVG(Price_$) AS AvgPrice_by_Year
 FROM 
-   [dbo].[KTH_bike_Final]
+   [dbo].[KTM_bike_Final]
 WHERE 
    Used_Time like '199%'
 GROUP By
@@ -490,7 +501,7 @@ SELECT
    AVG(Mileage_km) AS AvgMileage_by_Year,
    AVG(Price_$) AS AvgPrice_by_Year
 FROM 
-   [dbo].[KTH_bike_Final]
+   [dbo].[KTM_bike_Final]
 WHERE 
    Used_Time like '200%'
 GROUP By
@@ -506,7 +517,7 @@ SELECT
    AVG(Mileage_km) AS AvgMileage_by_Year,
    AVG(Price_$) AS AvgPrice_by_Year
 FROM 
-   [dbo].[KTH_bike_Final]
+   [dbo].[KTM_bike_Final]
 WHERE 
    Used_Time like '201%'
 GROUP By
@@ -522,7 +533,7 @@ SELECT
    AVG(Mileage_km) AS AvgMileage_by_Year,
    AVG(Price_$) AS AvgPrice_by_Year
 FROM 
-  [dbo].[KTH_bike_Final]
+  [dbo].[KTM_bike_Final]
 WHERE 
    Used_Time like '202%'
 GROUP By
